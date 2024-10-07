@@ -1,1 +1,12 @@
+<div class="container">
+  <video [src]="urlVideo" controls width="500px" height="300px"></video>
+  <input
+    type="file"
+    id="arquivo"
+    class="form-control mt-3 ml-3"
+    (change)="onFileSelected($event)"
+    accept="video/*"
+  />
+</div>
+
 <router-outlet />
