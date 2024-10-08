@@ -9,24 +9,28 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  @ViewChild('video', { static: false }) video!: ElementRef<HTMLVideoElement>;
+  //@ViewChild('video', { static: false }) video!: ElementRef<HTMLVideoElement>;
+  video = viewChild<ElementRef<HTMLVideoElement>>('video');
   urlImagem: string = '';
 
   capturarImagem() {
     const canvas = document.createElement('canvas');
-    canvas.width = this.video.nativeElement.videoWidth;
-    canvas.height = this.video.nativeElement.videoHeight;
-    const context = canvas.getContext('2d');
-    context?.drawImage(
-      this.video.nativeElement,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    const imageUrl = canvas.toDataURL('image/png');
+    const videoElement = this.video();
+    if (videoElement) {
+      canvas.width = videoElement.nativeElement.videoWidth;
+      canvas.height = videoElement.nativeElement.videoHeight;
+      const context = canvas.getContext('2d');
+      context?.drawImage(
+        videoElement.nativeElement,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      const imageUrl = canvas.toDataURL('image/png');
 
-    this.urlImagem = imageUrl;
+      this.urlImagem = imageUrl;
+    }
   }
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
