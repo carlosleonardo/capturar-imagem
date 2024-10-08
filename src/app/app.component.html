@@ -12,6 +12,14 @@
   <button class="btn btn-primary mt-3 ml-3" (click)="capturarImagem()">
     Capturar Imagem
   </button>
+  @if (urlImagem) {
+  <img
+    [src]="urlImagem"
+    class="mt-3"
+    alt="Imagem Capturada"
+    [style]="{ width: '320px', height: 'auto' }"
+  />
+  }
 </div>
 
 <router-outlet />

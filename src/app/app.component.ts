@@ -1,4 +1,4 @@
-import { Component, ViewChild, viewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -9,9 +9,25 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  @ViewChild('video', { static: false }) video!: HTMLVideoElement;
+  @ViewChild('video', { static: false }) video!: ElementRef<HTMLVideoElement>;
+  urlImagem: string = '';
 
-  capturarImagem() {}
+  capturarImagem() {
+    const canvas = document.createElement('canvas');
+    canvas.width = this.video.nativeElement.videoWidth;
+    canvas.height = this.video.nativeElement.videoHeight;
+    const context = canvas.getContext('2d');
+    context?.drawImage(
+      this.video.nativeElement,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+    const imageUrl = canvas.toDataURL('image/png');
+
+    this.urlImagem = imageUrl;
+  }
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const file = inputElement.files?.[0];
