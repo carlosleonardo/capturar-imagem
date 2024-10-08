@@ -9,7 +9,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  //@ViewChild('video', { static: false }) video!: ElementRef<HTMLVideoElement>;
   video = viewChild<ElementRef<HTMLVideoElement>>('video');
   urlImagem: string = '';
 
