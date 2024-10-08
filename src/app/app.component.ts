@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -9,6 +9,9 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  @ViewChild('video', { static: false }) video!: HTMLVideoElement;
+
+  capturarImagem() {}
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const file = inputElement.files?.[0];
@@ -22,5 +25,6 @@ export class AppComponent {
     }
   }
   urlVideo: string = '';
+
   title = 'capturar-imagem';
 }

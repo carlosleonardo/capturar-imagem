@@ -1,5 +1,7 @@
 <div class="container">
-  <video [src]="urlVideo" controls width="500px" height="300px"></video>
+  <video [src]="urlVideo" controls width="500px" height="300px" #video>
+    Seu browser não suporta a tag de vídeo
+  </video>
   <input
     type="file"
     id="arquivo"
@@ -7,6 +9,9 @@
     (change)="onFileSelected($event)"
     accept="video/*"
   />
+  <button class="btn btn-primary mt-3 ml-3" (click)="capturarImagem()">
+    Capturar Imagem
+  </button>
 </div>
 
 <router-outlet />
